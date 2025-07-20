@@ -13,6 +13,23 @@ const PersonalWebsite = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
 
+  // Download Resume Button handler
+  const handleResumeDownload = () => {
+    // Create a new anchor element
+    const link = document.createElement('a');
+
+    // Set href to resume file in the public folder
+    link.href = '/RenderCV_EngineeringResumes_Theme (1).pdf'; // Make sure the file is placed inside /public
+
+    // Define a custom filename
+    link.download = 'Adit_Jana_Java_SpringBoot_Kafka_6yrs_Resume.pdf';
+
+    // Append to the DOM and trigger click
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Handle scroll to update active section
   useEffect(() => {
     const handleScroll = () => {
@@ -24,7 +41,7 @@ const PersonalWebsite = () => {
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetBottom = offsetTop + element.offsetHeight;
-          
+
           if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
             setActiveSection(section);
             break;
@@ -147,14 +164,14 @@ const PersonalWebsite = () => {
         <div className="p-6">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-white text-xl font-bold">Portfolio</h2>
-            <button 
+            <button
               onClick={() => setIsMenuOpen(false)}
               className="lg:hidden text-white hover:text-blue-400"
             >
               <X size={24} />
             </button>
           </div>
-          
+
           <ul className="space-y-4">
             {navItems.map((item) => {
               const IconComponent = item.icon;
@@ -162,11 +179,10 @@ const PersonalWebsite = () => {
                 <li key={item.id}>
                   <button
                     onClick={() => scrollToSection(item.id)}
-                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${
-                      activeSection === item.id 
-                        ? 'bg-blue-600 text-white' 
-                        : 'text-gray-300 hover:bg-white/10 hover:text-white'
-                    }`}
+                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${activeSection === item.id
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                      }`}
                   >
                     <IconComponent size={20} />
                     <span>{item.label}</span>
@@ -193,7 +209,7 @@ const PersonalWebsite = () => {
       </nav>
 
       {/* Mobile Menu Button */}
-      <button 
+      <button
         onClick={() => setIsMenuOpen(true)}
         className="fixed top-6 left-6 z-40 lg:hidden bg-black/20 backdrop-blur-lg p-3 rounded-lg text-white hover:bg-white/10 transition-colors"
       >
@@ -206,8 +222,8 @@ const PersonalWebsite = () => {
         <section id="home" className="min-h-screen flex items-center justify-center px-6 py-20">
           <div className="max-w-4xl mx-auto text-center">
             <div className="mb-8">
-              <img 
-                src="/Red Modern Formal Facebook Profile Picture Update 1.gif" 
+              <img
+                src="/Red Modern Formal Facebook Profile Picture Update 1.gif"
                 alt="Profile"
                 className="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-blue-500 shadow-2xl"
               />
@@ -219,14 +235,14 @@ const PersonalWebsite = () => {
                 Passionate about creating innovative digital solutions and turning ideas into reality through code
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button 
+                <button
                   onClick={() => scrollToSection('portfolio')}
                   className="bg-gradient-to-r from-blue-600 to-teal-600 text-white px-8 py-3 rounded-lg hover:from-blue-700 hover:to-teal-700 transition-all duration-200 flex items-center justify-center space-x-2"
                 >
                   <Eye size={20} />
                   <span>View My Work</span>
                 </button>
-                <button 
+                <button
                   onClick={() => scrollToSection('contact')}
                   className="border-2 border-blue-500 text-blue-400 px-8 py-3 rounded-lg hover:bg-blue-500 hover:text-white transition-all duration-200 flex items-center justify-center space-x-2"
                 >
@@ -244,21 +260,21 @@ const PersonalWebsite = () => {
             <h2 className="text-4xl font-bold text-white mb-12 text-center">About Me</h2>
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <img 
-                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=600&fit=crop" 
+                <img
+                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=600&fit=crop"
                   alt="About me"
                   className="rounded-2xl shadow-2xl"
                 />
               </div>
               <div className="space-y-6">
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  With over 5 years of experience in software development, I specialize in creating 
-                  robust web applications and mobile solutions. My passion lies in solving complex 
+                  With over 5 years of experience in software development, I specialize in creating
+                  robust web applications and mobile solutions. My passion lies in solving complex
                   problems and delivering exceptional user experiences.
                 </p>
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  I work with modern technologies including React, Node.js, Python, and cloud platforms 
-                  to build scalable applications. I believe in writing clean, maintainable code and 
+                  I work with modern technologies including React, Node.js, Python, and cloud platforms
+                  to build scalable applications. I believe in writing clean, maintainable code and
                   following best practices.
                 </p>
                 <div className="grid grid-cols-2 gap-6 mt-8">
@@ -273,15 +289,12 @@ const PersonalWebsite = () => {
                 </div>
 
                 {/* download resume button */}
-                <a
-                  href="/public/RenderCV_EngineeringResumes_Theme (1).pdf"
-                  download
-                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2"
-                >
+                <button
+                  onClick={handleResumeDownload}
+                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
                   <Download size={20} />
                   <span>Download Resume</span>
-                </a>
-
+                </button>
               </div>
             </div>
           </div>
@@ -319,8 +332,8 @@ const PersonalWebsite = () => {
               {portfolioItems.map((item, index) => (
                 <div key={index} className="bg-white/5 backdrop-blur-lg rounded-xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all duration-300 group">
                   <div className="relative overflow-hidden">
-                    <img 
-                      src={item.image} 
+                    <img
+                      src={item.image}
                       alt={item.title}
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
@@ -372,7 +385,7 @@ const PersonalWebsite = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="space-y-6">
                 <div>
                   <input
@@ -418,14 +431,14 @@ const PersonalWebsite = () => {
                     className="w-full bg-white/5 backdrop-blur-lg border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 transition-colors resize-none"
                   ></textarea>
                 </div>
-                
+
                 {submitStatus === 'success' && (
                   <div className="text-green-400 text-center">Message sent successfully!</div>
                 )}
                 {submitStatus === 'error' && (
                   <div className="text-red-400 text-center">Failed to send message. Please try again.</div>
                 )}
-                
+
                 <button
                   onClick={handleFormSubmit}
                   disabled={isSubmitting}
