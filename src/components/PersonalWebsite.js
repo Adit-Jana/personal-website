@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, User, Briefcase, Eye, Mail, Phone, MapPin, ExternalLink, Github, Linkedin, Twitter, ChevronRight, Star, Award, Download } from 'lucide-react';
+import DownloadResumeButton from './DownloadResumeButton';
+
 
 const PersonalWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,22 +15,6 @@ const PersonalWebsite = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
 
-  // Download Resume Button handler
-  const handleResumeDownload = () => {
-    // Create a new anchor element
-    const link = document.createElement('a');
-
-    // Set href to resume file in the public folder
-    link.href = '/RenderCV_EngineeringResumes_Theme (1).pdf'; // Make sure the file is placed inside /public
-
-    // Define a custom filename
-    link.download = 'Adit_Jana_Java_SpringBoot_Kafka_6yrs_Resume.pdf';
-
-    // Append to the DOM and trigger click
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
 
   // Handle scroll to update active section
   useEffect(() => {
@@ -289,12 +275,13 @@ const PersonalWebsite = () => {
                 </div>
 
                 {/* download resume button */}
-                <button
-                  onClick={handleResumeDownload}
-                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
+                 {/* <button
+                  onClick={DownloadResumeButton}
+                  className= "bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
                   <Download size={20} />
                   <span>Download Resume</span>
-                </button>
+                </button> */}
+                <DownloadResumeButton />
               </div>
             </div>
           </div>
