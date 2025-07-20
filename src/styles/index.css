@@ -68,3 +68,46 @@ textarea:focus {
 body, html {
   overflow-x: hidden;
 }
+
+
+
+/* Add this to your global styles file */
+/* Shimmer effect for buttons download buttons*/
+.shimmer-button {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  background-color: #2563eb;
+  color: white;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shimmer-button:hover {
+  background-color: #1d4ed8;
+}
+
+.shimmer-button::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(120deg, #3b82f6, #6366f1, #3b82f6);
+  background-size: 200% 200%;
+  animation: shimmer 3s linear infinite;
+  z-index: -1;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
